@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ creating a new app """
-from flask import Flask, jsonify
+from flask import Flask, jsonify, make_response
 from models import storage
 from api.v1.views import app_views
 from os import getenv
@@ -17,7 +17,7 @@ def close(exception):
 
 @app.errorhandler(404)
 def resource_not_found(e):
-    return jsonify(error=str(e)), 404
+    return make_response(jsonify(error=str(e)), 404)
 
 if __name__ == "__main__":
     API_HOST = getenv('HBNB_API_HOST')
