@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 """ creating a new app """
-from flask import Flask
+from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 from os import getenv
+
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
@@ -13,6 +14,12 @@ app.register_blueprint(app_views)
 def close(exception):
     """ close the storage """
     storage.close()
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    """ error 404 handler """
+    return jsonify({"error": "Not found"})
 
 if __name__ == "__main__":
     API_HOST = getenv('HBNB_API_HOST')
