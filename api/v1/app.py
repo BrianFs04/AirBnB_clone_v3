@@ -9,7 +9,7 @@ app.register_blueprint(app_views)
 
 
 @app.teardown_appcontext
-def close(error):
+def close(exception):
     """ close the storage """
     storage.close()
 
