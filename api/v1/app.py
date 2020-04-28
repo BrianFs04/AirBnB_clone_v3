@@ -15,9 +15,10 @@ def close(exception):
     """ close the storage """
     storage.close()
 
+
 @app.errorhandler(404)
-def resource_not_found(e):
-    return make_response(jsonify(error=str(e)), 404)
+def resource_not_found(error):
+    return make_response(jsonify({"error": "Not found"}), 404)
 
 if __name__ == "__main__":
     API_HOST = getenv('HBNB_API_HOST')
