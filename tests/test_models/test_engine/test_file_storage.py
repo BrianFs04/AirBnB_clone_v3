@@ -118,6 +118,7 @@ class TestFileStorage(unittest.TestCase):
     def test_count(self):
         """ test count method """
         self.assertIs(type(storage.count()), int)
+        self.assertIs(type(storage.count(State)), int)
 
     def test_get(self):
         """ test get method """
