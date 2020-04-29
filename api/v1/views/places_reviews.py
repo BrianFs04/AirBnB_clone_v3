@@ -23,7 +23,6 @@ def reviews(place_id):
     return (jsonify(place))
 
 
-
 @app_views.route('/reviews/<review_id>', methods=['GET'],
                  strict_slashes=False)
 def review(review_id):
@@ -61,6 +60,8 @@ def creates_review(place_id):
     user = storage.get(User, re['user_id'])
     if not user:
         abort(404)
+    if 'text' not in re:
+        abort(400, 'Missing text')
     review = Review(**re)
     setattr(review, 'place_id', place_id)
     storage.new(review)
@@ -72,7 +73,7 @@ def creates_review(place_id):
                  strict_slashes=False)
 def updates_review(review_id):
     """ updates a review """
-    review =  storage.get(Review, review_id)
+    review = storage.get(Review, review_id)
     if not review:
         abort(404)
     re = request.get_json()
