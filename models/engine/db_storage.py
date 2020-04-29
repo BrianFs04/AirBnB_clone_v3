@@ -73,7 +73,7 @@ class DBStorage:
         self.__session = Session
 
     def get(self, cls, id):
-        """A method to retrieve one object"""
+        """A method to retrieve one """
         objs = self.__session.query(cls).filter(cls.id == id).first()
         if objs:
             return objs
